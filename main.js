@@ -1,6 +1,14 @@
 import openLink from "./scripts/open-link.js"
 import menu from "./parts/menu.js"
 
+// let loaded = window.sessionStorage.getItem("loaded")
+// if (loaded === "true") {
+//   window.sessionStorage.setItem("loaded", "false")
+// } else {
+//   addMenu()
+// }
+
+
 document.body.appendChild(menu)
 
 let menuItems = {
