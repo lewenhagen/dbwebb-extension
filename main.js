@@ -1,43 +1,25 @@
-import { openLink } from "./scripts/open-link.js"
-
-const menuHeight = 300
-const menuWidth = 400
-
-console.log("magic script is online.")
-
-let menu = document.createElement("div")
-menu.style.height = `${menuHeight}px`
-menu.style.width = `${menuWidth}px`
-menu.style.position = "absolute"
-menu.style.top = ((window.innerHeight / 2) - (menuHeight / 2)) + "px"
-menu.style.left = ((window.innerWidth / 2) - (menuWidth / 2)) + "px"
-menu.style.border = "5px solid black"
-menu.style.padding = "1em"
-menu.style.backgroundColor = "rgba(113, 77, 168, 0.86)"
-menu.style.color = "white"
-menu.style.fontSize = "24px"
-
+import openLink from "./scripts/open-link.js"
+import menu from "./parts/menu.js"
 
 document.body.appendChild(menu)
 
-let mainObject = {
+let menuItems = {
     "1) Open students link": openLink
 }
 
 function addMenu() {
     menu.innerHTML = `
-    <span class="openextension">1) Open students link</span>
+    <span class="menuItem">1) Open students link</span>
     `
     addListeners()
 }
 
 function addListeners() {
-    let items = document.getElementsByClassName("openextension")
+    let items = document.getElementsByClassName("menuItem")
 
     for (const item of items) {
         item.addEventListener("click", function(event) {
-            console.log("triggered")
-            mainObject[event.target.innerText]()
+            menuItems[event.target.innerText]()
             menu.parentNode.removeChild(menu)
         })
 
@@ -50,8 +32,6 @@ function addListeners() {
             event.target.style.color = "white"
         }
     }
-
-
 }
 
 addMenu()

@@ -1,4 +1,4 @@
-export const openLink = function() {
+function openLink () {
     let pattern_inspect = /https?:\/\/w+.student.bth.se\/~\w{4}\d{2}\/dbwebb-kurser.*/i;
     let iframe = document.getElementById("speedgrader_iframe").contentWindow.document;
     let content = iframe.getElementById("submission_preview");
@@ -7,3 +7,6 @@ export const openLink = function() {
         window.open(match_inspect, '_blank');
     }
 }
+
+
+export default openLink
