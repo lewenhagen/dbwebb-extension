@@ -1,13 +1,16 @@
 import { openLink } from "./scripts/open-link.js"
 
+const menuHeight = 300
+const menuWidth = 400
+
 console.log("magic script is online.")
 
 let menu = document.createElement("div")
-menu.style.height = "400px"
-menu.style.width = "600px"
+menu.style.height = `${menuHeight}px`
+menu.style.width = `${menuWidth}px`
 menu.style.position = "absolute"
-menu.style.top = ((window.innerHeight / 2) - 200) + "px"
-menu.style.left = ((window.innerWidth / 2) - 300) + "px"
+menu.style.top = ((window.innerHeight / 2) - (menuHeight / 2)) + "px"
+menu.style.left = ((window.innerWidth / 2) - (menuWidth / 2)) + "px"
 menu.style.border = "5px solid black"
 menu.style.padding = "1em"
 menu.style.backgroundColor = "rgba(113, 77, 168, 0.86)"
@@ -40,6 +43,11 @@ function addListeners() {
 
         item.onmouseover = function(event) {
             event.target.style.cursor = "pointer"
+            event.target.style.color = "black"
+        }
+        item.onmouseleave = function(event) {
+            event.target.style.cursor = "pointer"
+            event.target.style.color = "white"
         }
     }
 
