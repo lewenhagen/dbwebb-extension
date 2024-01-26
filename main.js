@@ -1,25 +1,13 @@
 import openLink from "./scripts/open-link.js"
 import menu from "./parts/menu.js"
 
-// let loaded = window.sessionStorage.getItem("loaded")
-// if (loaded === "true") {
-//   window.sessionStorage.setItem("loaded", "false")
-// } else {
-//   addMenu()
-// }
+document.getElementById("menu") ? 
+  document.getElementById("menu").remove() : 
+  addMenu()
 
 
-document.body.appendChild(menu)
-
-let menuItems = {
+const menuItems = {
     "1) Open students link": openLink
-}
-
-function addMenu() {
-    menu.innerHTML = `
-    <span class="menuItem">1) Open students link</span>
-    `
-    addListeners()
 }
 
 function addListeners() {
@@ -28,7 +16,7 @@ function addListeners() {
     for (const item of items) {
         item.addEventListener("click", function(event) {
             menuItems[event.target.innerText]()
-            menu.parentNode.removeChild(menu)
+            menu.remove()
         })
 
         item.onmouseover = function(event) {
@@ -42,4 +30,10 @@ function addListeners() {
     }
 }
 
-addMenu()
+function addMenu() {
+  menu.innerHTML = `
+  <span class="menuItem">1) Open students link</span>
+  `
+  document.body.appendChild(menu)
+  addListeners()
+}

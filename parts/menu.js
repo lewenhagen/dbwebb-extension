@@ -3,6 +3,7 @@ const menuWidth = 400
 
 let menu = document.createElement("div")
 
+menu.id = "menu"
 menu.style.height = `${menuHeight}px`
 menu.style.width = `${menuWidth}px`
 menu.style.position = "absolute"
