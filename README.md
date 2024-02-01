@@ -11,7 +11,7 @@ Clone this repo.
 
 #### Firefox
 
-1. Open about:debuggin
+1. Open about:debugging
 2. Choose "This Firefox"
 3. Click "Load Temporary Add-on..." and choose the file manifest.json.
 
