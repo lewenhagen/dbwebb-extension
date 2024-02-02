@@ -10,6 +10,8 @@ let franklin = {
 
         document.body.appendChild(document.createElement('script')).src = 'https://booklets.emilfolino.se/' + script;
 
+        document.getElementById("feedbackText").focus();
+
         exit.actionRemove();
     },
 };
