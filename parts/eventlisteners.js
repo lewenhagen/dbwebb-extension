@@ -32,6 +32,7 @@ const eventListeners = {
             listener[0].removeEventListener(listener[1], listener[2]);
         });
         eventListeners.contentListeners = [];
+        console.log(eventListeners.contentListeners);
     }
 }
 

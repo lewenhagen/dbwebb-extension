@@ -57,7 +57,19 @@ function addListeners() {
         exclude = ['input', 'textarea'];
 
         if (exclude.indexOf(source.tagName.toLowerCase()) === -1) {
-            console.log('You pressed ' + key + ' (keyCode: ' + keycode + ').');
+            // console.log('You pressed ' + key + ' (keyCode: ' + keycode + ').');
+            let pattern = /Digit(\d+)/i;
+            let match = keycode.match(pattern)
+            if (match !== null) {
+
+                let digit = parseInt(match[1]);
+                console.log(parseInt(match[1]));
+                if (digit > 0 && digit <= menuItems.length) {
+                    menuItems[digit - 1].action();
+                }
+            } else if (keycode === "KeyQ") {
+                exit.manualRemove();
+            }
         }
     }, eventListeners.content);
 }
