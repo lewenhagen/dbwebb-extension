@@ -1,8 +1,8 @@
 
+import eventListeners from "./eventlisteners.js"
 
 let exit = {
     name: "Close menu",
-    eventListeners: null,
     actionRemove: function () {
         // Method is automatically called when another action is run.
         if (window.sessionStorage.getItem("exitOnAction") === "true") {
@@ -12,7 +12,7 @@ let exit = {
     manualRemove: function () {
         // Method is called when the user has pressed close button.
         document.getElementById("menu").remove();
-        exit.eventListeners.clearAllListeners();
+        eventListeners.clearAllListeners();
     }
 };
 

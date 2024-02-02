@@ -17,9 +17,6 @@ const menuItems = [
 function initialize() {
     document.body.appendChild(menu);
 
-    exit.eventListeners = eventListeners;
-    settings.eventListeners = eventListeners;
-
     let closeButton = document.getElementById(exit.name)
     eventListeners.addEventListener(closeButton, "click", exit.manualRemove, eventListeners.permanent);
 

@@ -1,36 +1,35 @@
+import eventListeners from "./eventlisteners.js"
 
 let settingsMenu = {
-    eventListeners: null,
     name: "Settings",
     addEventListeners: function (returnCallback) {
         let addToStudentUrlPath = document.getElementById("addToStudentUrlPath");
-        settingsMenu.eventListeners.addEventListener(addToStudentUrlPath, "input", function (event) {
+        eventListeners.addEventListener(addToStudentUrlPath, "input", function (event) {
             window.sessionStorage.setItem("addToStudentUrlPath", event.target.value);
-        }, settingsMenu.eventListeners.content);
+        }, eventListeners.content);
 
         let checkbox = document.getElementById('exitOnAction');
-        settingsMenu.eventListeners.addEventListener(checkbox, 'change', function () {
+        eventListeners.addEventListener(checkbox, 'change', function () {
             window.sessionStorage.setItem("exitOnAction", checkbox.checked);
-        }, settingsMenu.eventListeners.content);
+        }, eventListeners.content);
 
         let returnButton = document.getElementById("return");
-        settingsMenu.eventListeners.addEventListener(returnButton, "click", function (event) {
-            settingsMenu.eventListeners.clearContentListeners();
+        eventListeners.addEventListener(returnButton, "click", function (event) {
+            eventListeners.clearContentListeners();
             returnCallback();
-        }, settingsMenu.eventListeners.content);
+        }, eventListeners.content);
 
         let resetButton = document.getElementById("reset");
-        settingsMenu.eventListeners.addEventListener(resetButton, "click", function (event) {
+        eventListeners.addEventListener(resetButton, "click", function (event) {
             window.sessionStorage.clear();
-            settingsMenu.eventListeners.clearContentListeners();
+            eventListeners.clearContentListeners();
             renderHtml(returnCallback);
-        }, settingsMenu.eventListeners.content);
+        }, eventListeners.content);
     },
     renderHtml: function (callback) {
         console.log("hej");
         let addPart = window.sessionStorage.getItem("addToStudentUrlPath");
-        let exitOnAction = window.sessionStorage.getItem("exitOnAction") == "true"; // JS suger röv. Hur kan detta vara lösningen för att göra om "false" till false...
-
+        let exitOnAction = window.sessionStorage.getItem("exitOnAction") == "true";
 
         let html = `
             <div>
