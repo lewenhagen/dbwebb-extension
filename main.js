@@ -5,12 +5,16 @@ import eventListeners from "./parts/eventlisteners.js"
 import openLink from "./scripts/open-link.js"
 import openUmbridge from "./scripts/open-umbridge.js"
 import calcScore from "./scripts/calc-quiz-score.js"
+import allTexts from "./scripts/all-texts.js"
+import franklin from "./scripts/franklin.js"
 
 
 const menuItems = [
     openLink,
     openUmbridge,
+    franklin,
     calcScore,
+    allTexts,
 ];
 
 

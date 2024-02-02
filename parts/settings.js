@@ -41,10 +41,10 @@ let settingsMenu = {
             <label>Automatically exit plugin menu after running a script?</label>
             <input type="checkbox" class="menuItem" id="exitOnAction" ${exitOnAction ? "checked" : "undefined"}>
             </div>
-            <div>
-            Keybinds funkar i startmenyn. Följande finns:
-            1-X för varje menyval. Trycker du 1 på tangetbordet körs val 1 osv.
-            q: stänger ner menyn.
+            <div style="font-size:14px;">
+            Keybinds funkar i startmenyn. Följande finns:<br>
+            1-X för varje menyval. Trycker du 1 på tangetbordet körs val 1 osv.<br>
+            q: stänger ner menyn.<br>
             </div>
             <button id="return">Return</button>
             <button id="reset">Reset session</button>
