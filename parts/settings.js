@@ -4,6 +4,8 @@ let settingsMenu = {
     name: "Settings",
     addEventListeners: function (returnCallback) {
         let addToStudentUrlPath = document.getElementById("addToStudentUrlPath");
+        addToStudentUrlPath.focus();
+
         eventListeners.addEventListener(addToStudentUrlPath, "input", function (event) {
             window.sessionStorage.setItem("addToStudentUrlPath", event.target.value);
         }, eventListeners.content);
