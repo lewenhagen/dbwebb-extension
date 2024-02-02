@@ -7,9 +7,6 @@ const eventListeners = {
     addEventListener: function (element, type, func, saveType) {
         element.addEventListener(type, func);
 
-        console.log(eventListeners.contentListeners);
-        console.log(eventListeners.permanentListeners);
-
         if (saveType === eventListeners.permanent) {
             eventListeners.permanentListeners.push([element, type, func]);
         } else {
@@ -18,7 +15,6 @@ const eventListeners = {
     },
 
     clearAllListeners: function () {
-        console.log(eventListeners.permanentListeners);
         eventListeners.permanentListeners.forEach(listener => {
             listener[0].removeEventListener(listener[1], listener[2]);
         });
@@ -27,12 +23,10 @@ const eventListeners = {
     },
 
     clearContentListeners: function () {
-        console.log(eventListeners.contentListeners);
         eventListeners.contentListeners.forEach(listener => {
             listener[0].removeEventListener(listener[1], listener[2]);
         });
         eventListeners.contentListeners = [];
-        console.log(eventListeners.contentListeners);
     }
 }
 

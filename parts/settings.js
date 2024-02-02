@@ -29,7 +29,6 @@ let settingsMenu = {
         }, eventListeners.content);
     },
     renderHtml: function (callback) {
-        console.log("hej");
         let addPart = window.sessionStorage.getItem("addToStudentUrlPath");
         let exitOnAction = window.sessionStorage.getItem("exitOnAction") == "true";
 
@@ -41,6 +40,11 @@ let settingsMenu = {
             <div>
             <label>Automatically exit plugin menu after running a script?</label>
             <input type="checkbox" class="menuItem" id="exitOnAction" ${exitOnAction ? "checked" : "undefined"}>
+            </div>
+            <div>
+            Keybinds funkar i startmenyn. Följande finns:
+            1-X för varje menyval. Trycker du 1 på tangetbordet körs val 1 osv.
+            q: stänger ner menyn.
             </div>
             <button id="return">Return</button>
             <button id="reset">Reset session</button>

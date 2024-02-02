@@ -60,7 +60,6 @@ function addListeners() {
             if (match !== null) {
 
                 let digit = parseInt(match[1]);
-                console.log(parseInt(match[1]));
                 if (digit > 0 && digit <= menuItems.length) {
                     menuItems[digit - 1].action();
                 }
