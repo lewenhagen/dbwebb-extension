@@ -1,9 +1,21 @@
 import menu from "./parts/menu.js"
 import exit from "./parts/exit.js"
 import settings from "./parts/settings.js"
+import eventListeners from "./parts/eventlisteners.js"
 import openLink from "./scripts/open-link.js"
 import openUmbridge from "./scripts/open-umbridge.js"
 import calcScore from "./scripts/calc-quiz-score.js"
+
+// function activateExtension() {
+//     running = window.sessionStorage.setItem("running", "true");
+//     showing = Boolean(document.getElementById("menu"));
+
+//     console.log(showing);
+//     console.log(window.sessionStorage.getItem("running"));
+// }
+
+// activateExtension();
+
 
 const menuItems = [
     openLink,
@@ -11,16 +23,41 @@ const menuItems = [
     calcScore,
 ];
 
-document.getElementById("menu") ?
-    exit.manualRemove() :
-    addMenu()
+
+function initialize() {
+    document.body.appendChild(menu);
+
+    exit.eventListeners = eventListeners;
+    settings.eventListeners = eventListeners;
+
+    let closeButton = document.getElementById(exit.name)
+    eventListeners.addEventListener(closeButton, "click", exit.manualRemove);
+
+    let settingsButton = document.getElementById(settings.name)
+    eventListeners.addEventListener(settingsButton, "click", function () {
+        settings.renderHtml(addMenu);
+    });
+
+    eventListeners.addEventListener(document, "keydown", function test(event) {
+        let keycode = event.code;
+        key = String.fromCharCode(keycode);
+        source = event.target;
+        exclude = ['input', 'textarea'];
+
+        if (exclude.indexOf(source.tagName.toLowerCase()) === -1) {
+            console.log('You pressed ' + key + ' (keyCode: ' + keycode + ').');
+        }
+    });
+}
 
 
 function addListeners() {
+
+
     let items = document.getElementsByClassName("menuItem")
 
     for (const item of items) {
-        item.addEventListener("click", function (event) {
+        eventListeners.addEventListener(item, "click", function (event) {
             menuItems[event.target.id].action();
         });
 
@@ -33,14 +70,6 @@ function addListeners() {
             event.target.style.color = "white"
         }
     }
-
-    let closeButton = document.getElementById(exit.name)
-    closeButton.addEventListener("click", exit.manualRemove);
-
-    let settingsButton = document.getElementById(settings.name)
-    settingsButton.addEventListener("click", function () {
-        settings.renderHtml(addMenu);
-    });
 }
 
 function addMenu() {
@@ -52,6 +81,12 @@ function addMenu() {
 
     menu.childNodes[0].innerHTML = optionsString;
 
-    document.body.appendChild(menu)
+
     addListeners()
 }
+
+
+if (!document.getElementById("menu")) {
+    initialize();
+    addMenu();
+} //Else, gör inget

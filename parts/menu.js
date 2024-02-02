@@ -18,6 +18,7 @@ menu.style.backgroundColor = "rgba(113, 77, 168, 0.86)"
 menu.style.color = "white"
 menu.style.fontSize = "24px"
 
+
 let content = document.createElement("div")
 content.id = "menuContent";
 
