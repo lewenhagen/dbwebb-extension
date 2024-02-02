@@ -6,16 +6,6 @@ import openLink from "./scripts/open-link.js"
 import openUmbridge from "./scripts/open-umbridge.js"
 import calcScore from "./scripts/calc-quiz-score.js"
 
-// function activateExtension() {
-//     running = window.sessionStorage.setItem("running", "true");
-//     showing = Boolean(document.getElementById("menu"));
-
-//     console.log(showing);
-//     console.log(window.sessionStorage.getItem("running"));
-// }
-
-// activateExtension();
-
 
 const menuItems = [
     openLink,
@@ -31,23 +21,13 @@ function initialize() {
     settings.eventListeners = eventListeners;
 
     let closeButton = document.getElementById(exit.name)
-    eventListeners.addEventListener(closeButton, "click", exit.manualRemove);
+    eventListeners.addEventListener(closeButton, "click", exit.manualRemove, eventListeners.permanent);
 
     let settingsButton = document.getElementById(settings.name)
     eventListeners.addEventListener(settingsButton, "click", function () {
+        eventListeners.clearContentListeners();
         settings.renderHtml(addMenu);
-    });
-
-    eventListeners.addEventListener(document, "keydown", function test(event) {
-        let keycode = event.code;
-        key = String.fromCharCode(keycode);
-        source = event.target;
-        exclude = ['input', 'textarea'];
-
-        if (exclude.indexOf(source.tagName.toLowerCase()) === -1) {
-            console.log('You pressed ' + key + ' (keyCode: ' + keycode + ').');
-        }
-    });
+    }, eventListeners.permanent);
 }
 
 
@@ -59,7 +39,7 @@ function addListeners() {
     for (const item of items) {
         eventListeners.addEventListener(item, "click", function (event) {
             menuItems[event.target.id].action();
-        });
+        }, eventListeners.content);
 
         item.onmouseover = function (event) {
             event.target.style.cursor = "pointer"
@@ -70,6 +50,16 @@ function addListeners() {
             event.target.style.color = "white"
         }
     }
+    eventListeners.addEventListener(document, "keydown", function test(event) {
+        let keycode = event.code;
+        key = String.fromCharCode(keycode);
+        source = event.target;
+        exclude = ['input', 'textarea'];
+
+        if (exclude.indexOf(source.tagName.toLowerCase()) === -1) {
+            console.log('You pressed ' + key + ' (keyCode: ' + keycode + ').');
+        }
+    }, eventListeners.content);
 }
 
 function addMenu() {
@@ -89,4 +79,4 @@ function addMenu() {
 if (!document.getElementById("menu")) {
     initialize();
     addMenu();
-} //Else, gör inget
+} //Else, gör inget föra att blockera att stänga av menyn från plugin knappen

@@ -11,7 +11,7 @@ let exit = {
     manualRemove: function () {
         // Method is called when the user has pressed close button.
         document.getElementById("menu").remove();
-        exit.eventListeners.clearEventListeners();
+        exit.eventListeners.clearAllListeners();
     }
 };
 
