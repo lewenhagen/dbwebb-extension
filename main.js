@@ -58,7 +58,7 @@ function addListeners() {
         exclude = ['input', 'textarea'];
 
         if (exclude.indexOf(source.tagName.toLowerCase()) === -1) {
-            // console.log('You pressed ' + key + ' (keyCode: ' + keycode + ').');
+            console.log('You pressed ' + key + ' (keyCode: ' + keycode + ').');
             let pattern = /Digit(\d+)/i;
             let match = keycode.match(pattern)
             if (match !== null) {
@@ -69,6 +69,9 @@ function addListeners() {
                 }
             } else if (keycode === "KeyQ") {
                 exit.manualRemove();
+            }
+            else if (keycode === "KeyS") {
+                document.getElementById("comment_submit_button").click();
             }
         }
     }, eventListeners.content);

@@ -43,7 +43,8 @@ let settingsMenu = {
             </div>
             <div style="font-size:14px;">
             Keybinds funkar i startmenyn. Följande finns:<br>
-            1-X för varje menyval. Trycker du 1 på tangetbordet körs val 1 osv.<br>
+            1-X: för varje menyval. Trycker du 1 på tangetbordet körs val 1 osv.<br>
+            s: för att klicka "Spara" knappen för kommentar<br>
             q: stänger ner menyn.<br>
             </div>
             <button id="return">Return</button>
