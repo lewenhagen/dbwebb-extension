@@ -1,5 +1,6 @@
 import menu from "./parts/menu.js"
 import exit from "./parts/exit.js"
+import storage from "./parts/storage.js"
 import settings from "./parts/settings.js"
 import eventListeners from "./parts/eventlisteners.js"
 import openLink from "./scripts/open-link.js"
@@ -18,7 +19,7 @@ const menuItems = [
 ];
 
 
-function initialize() {
+async function initialize() {
     document.body.appendChild(menu);
 
     let closeButton = document.getElementById(exit.name)
@@ -29,6 +30,8 @@ function initialize() {
         eventListeners.clearContentListeners();
         settings.renderHtml(addMenu);
     }, eventListeners.permanent);
+
+    await storage.load();
 }
 
 
@@ -92,6 +95,7 @@ function addMenu() {
 
 
 if (!document.getElementById("menu")) {
-    initialize();
-    addMenu();
+    initialize().then(() => {
+        addMenu();
+    });
 } //Else, gör inget föra att blockera att stänga av menyn från plugin knappen

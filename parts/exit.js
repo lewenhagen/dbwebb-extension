@@ -1,11 +1,12 @@
 
 import eventListeners from "./eventlisteners.js"
+import storage from "./storage.js"
 
 let exit = {
     name: "Close menu",
     actionRemove: function () {
         // Method is automatically called when another action is run.
-        if (window.sessionStorage.getItem("exitOnAction") === "true") {
+        if (storage.data["exitOnAction"] === true) {
             exit.manualRemove();
         }
     },

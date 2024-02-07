@@ -2,7 +2,11 @@
   "manifest_version":2,
   "version":"1.0",
   "name":"dbwebb",
-  "permissions": ["management", "activeTab"],
+  "permissions": [
+    "management",
+    "activeTab",
+    "storage"
+  ],
   "background": {
     "scripts" : ["background.js"]
   },

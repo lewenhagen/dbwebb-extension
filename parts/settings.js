@@ -1,4 +1,5 @@
 import eventListeners from "./eventlisteners.js"
+import storage from "./storage.js"
 
 let settingsMenu = {
     name: "Settings",
@@ -7,12 +8,12 @@ let settingsMenu = {
         addToStudentUrlPath.focus();
 
         eventListeners.addEventListener(addToStudentUrlPath, "input", function (event) {
-            window.sessionStorage.setItem("addToStudentUrlPath", event.target.value);
+            storage.set("addToStudentUrlPath", event.target.value);
         }, eventListeners.content);
 
         let checkbox = document.getElementById('exitOnAction');
         eventListeners.addEventListener(checkbox, 'change', function () {
-            window.sessionStorage.setItem("exitOnAction", checkbox.checked);
+            storage.set("exitOnAction", checkbox.checked)
         }, eventListeners.content);
 
         let returnButton = document.getElementById("return");
@@ -22,15 +23,15 @@ let settingsMenu = {
         }, eventListeners.content);
 
         let resetButton = document.getElementById("reset");
-        eventListeners.addEventListener(resetButton, "click", function (event) {
-            window.sessionStorage.clear();
+        eventListeners.addEventListener(resetButton, "click", async function (event) {
+            await storage.clear();
             eventListeners.clearContentListeners();
-            renderHtml(returnCallback);
+            settingsMenu.renderHtml(returnCallback);
         }, eventListeners.content);
     },
     renderHtml: function (callback) {
-        let addPart = window.sessionStorage.getItem("addToStudentUrlPath");
-        let exitOnAction = window.sessionStorage.getItem("exitOnAction") == "true";
+        let addPart = storage.data["addToStudentUrlPath"];
+        let exitOnAction = storage.data["exitOnAction"] == true;
 
         let html = `
             <div>
@@ -48,7 +49,7 @@ let settingsMenu = {
             q: stänger ner menyn.<br>
             </div>
             <button id="return">Return</button>
-            <button id="reset">Reset session</button>
+            <button id="reset">Reset storage</button>
             `;
 
         let menuContent = document.getElementById("menuContent");
