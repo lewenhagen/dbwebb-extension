@@ -10,7 +10,9 @@ let franklin = {
 
         document.body.appendChild(document.createElement('script')).src = 'https://booklets.emilfolino.se/' + script;
 
-        document.getElementById("feedbackText").focus();
+        new Promise(r => setTimeout(r, 500)).then(() => {
+            document.getElementById("feedbackText").focus();
+        });
 
         exit.actionRemove();
     },
