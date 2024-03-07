@@ -76,6 +76,16 @@ function addListeners() {
             else if (keycode === "KeyS") {
                 document.getElementById("comment_submit_button").click();
             }
+            else if (keycode === "KeyJ" && !!event.shiftKey) {
+                let e = document.getElementById("submission_to_view");
+                e.options[e.selectedIndex].nextElementSibling.selected="selected";
+                e.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+            else if (keycode === "KeyK" && !!event.shiftKey) {
+                let e = document.getElementById("submission_to_view");
+                e.options[e.selectedIndex].previousElementSibling.selected = "selected";
+                e.dispatchEvent(new Event('change', { bubbles: true }));
+            }
         }
     }, eventListeners.content);
 }
