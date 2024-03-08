@@ -36,7 +36,7 @@ let settingsMenu = {
         let html = `
             <div>
             <label>Pathto add after "me/" in link opener</label>
-            <input type="text" class="menuItem" id="addToStudentUrlPath" placeholder="${addPart ? addPart : "kmom0x/assignment"}" >
+            <input type="text" class="menuItem" id="addToStudentUrlPath" value="${addPart ? addPart : "kmom0x/assignment"}" >
             </div>
             <div>
             <label>Automatically exit plugin menu after running a script?</label>
