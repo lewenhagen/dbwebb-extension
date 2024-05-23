@@ -8,6 +8,7 @@ import openUmbridge from "./scripts/open-umbridge.js"
 import calcScore from "./scripts/calc-quiz-score.js"
 import allTexts from "./scripts/all-texts.js"
 import franklin from "./scripts/franklin.js"
+import showVideo from "./scripts/show-video.js"
 
 
 const menuItems = [
@@ -15,6 +16,7 @@ const menuItems = [
     openUmbridge,
     franklin,
     calcScore,
+    showVideo,
     allTexts,
 ];
 
