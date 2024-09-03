@@ -1,7 +1,7 @@
 import exit from "./exit.js"
 import settings from "./settings.js"
 
-const menuHeight = 300
+const menuHeight = 350
 const menuWidth = 400
 
 let menu = document.createElement("div")
