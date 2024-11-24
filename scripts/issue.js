@@ -6,27 +6,16 @@ const CODELABEL = "code error";
 const TEXTTITLE = "[Error] in text";
 const TEXTLABEL = "text error";
 
+
 function getSelectionElement() {
-    let text = "";
+    let selection = null;
 
     if (window.getSelection) {
-        text = window.getSelection().toString();
-    } else if (document.selection && document.selection.type != "Control") {
-        text = document.selection.createRange().text;
+        selection = window.getSelection();
     }
 
-    return text;
+    return selection;
 }
-
-
-function createIsssueForCode(){
-    createIssue(getSelectionElement(), CODETITLE, CODELABEL);
-};
-
-function createIsssueForText() {
-    createIssue(getSelectionElement(), TEXTTITLE, TEXTLABEL);
-};
-
 
 function findAnchor(element) {
     while (element) {
@@ -36,12 +25,82 @@ function findAnchor(element) {
                 return child.href;
             }
         }
-        element = element.parentElement;
+        element = element.previousElementSibling;
     }
     return window.location.href;
 }
 
-function createPopUp(){
+function createIsssueForCode(){
+    const selection = getSelectionElement();
+    const text = selection.toString();
+
+    const link = findAnchor(selection.anchorNode.parentElement);
+
+    const msg = encodeURIComponent(`
+**Describe the error**
+A clear and concise description of what the error is. What error occurred when executing:
+\`\`\`
+${text}
+\`\`\`
+
+**Link to example**
+${link}
+
+**Expected behavior**
+A clear and concise description of what you expected to happen when executing example.
+
+**Screenshots**
+If applicable, add screenshots to help explain your problem.
+
+**Execution environment:**
+Where was the code executed?
+ - OS: [e.g. iOS]
+ - Language [e.g. Bash command, Python, JS, C#]
+ - Program [e.g. terminal, browser, Thonny]
+
+**Additional context**
+Add any other context about the problem here.
+`);
+
+    createIssue(CODETITLE, CODELABEL, msg);
+};
+
+function createIsssueForText() {
+    const selection = getSelectionElement();
+    const text = selection.toString();
+    const link = findAnchor(selection.anchorNode.parentElement);
+
+    const msg = encodeURIComponent(`
+**Describe the error**
+A clear and concise description of what the error is. What is wrong or unclear in the text?
+\`\`\`
+${text}
+\`\`\`
+
+**Expected behavior**
+A clear and concise description of what you expected the text to be.
+
+**Link to example**
+${link}
+
+**Additional context**
+Add any other context about the problem here.
+`);
+
+    createIssue(TEXTTITLE, TEXTLABEL, msg);
+};
+
+function createIssue(title, labels, body){
+    let assignees;
+
+    let url = `https://github.com/dbwebb-se/website/issues/new?title=${title}&body=${body}&labels=${labels}`; //&assignees=${assignees}`;
+
+    window.open(url, '_blank');
+}
+
+
+
+function createPopUp() {
     // Create the button to open the menu
     const openMenuBtn = document.createElement('button');
     openMenuBtn.textContent = '⚠';
@@ -55,7 +114,7 @@ function createPopUp(){
     `;
     // Create the menu container
     const menu = document.createElement('div');
-    menu.innerText = "Rapportera fel genom att markera texten och klicka på en knapp";
+    menu.innerText = "Rapportera fel i texten genom att markera texten som är fel och klicka på en av knapparna nedanför";
     menu.style.cssText = `
             display: none;
             position: absolute;
@@ -105,54 +164,15 @@ function createPopUp(){
 
     // Optional: Add functionality to the other buttons
     codeButton.addEventListener('click', () => {
+        menu.style.display = 'none';
         createIsssueForCode();
     });
 
     textButton.addEventListener('click', () => {
+        menu.style.display = 'none';
         createIsssueForText();
     });
 }
-
-
-
-
-function createIssue(selectedText, title, labels, link){
-    let assignees;
-    
-    let body = `
-**Describe the error**
-A clear and concise description of what the error is.
-What error appeared when executing:
-\`\`\`
-${selectedText}
-\`\`\`
-
-**Link to example**
-${link}
-
-**Expected behavior**
-A clear and concise description of what you expected to happen when executing example.
-
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
-
-**Execution environment:**
-Where was the code executed?
- - OS: [e.g. iOS]
- - Language [e.g. Python, JS, C#]
- - Program [e.g. terminal, browser, Thonny]
-
-**Additional context**
-Add any other context about the problem here.
-`;
-
-    let url = `https://github.com/dbwebb-se/website/issues/new?title=${title}&body=${body}&labels=${labels}`; //&assignees=${assignees}`;
-
-    console.log(url);
-
-    window.open(url, '_blank');
-}
-
 
 let issue = {
     name: "Rapportera fel",
@@ -160,7 +180,6 @@ let issue = {
         // if (!window.location.href.includes("dbwebb.se")) {
 
         createPopUp();
-        console.log(getSelectionText());
 
         // exit.actionRemove();
         // }
