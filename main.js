@@ -9,7 +9,6 @@ import calcScore from "./scripts/calc-quiz-score.js"
 import allTexts from "./scripts/all-texts.js"
 import franklin from "./scripts/franklin.js"
 import showVideo from "./scripts/show-video.js"
-import issue from "./scripts/issue.js"
 
 
 const menuItems = [
@@ -19,7 +18,6 @@ const menuItems = [
     calcScore,
     showVideo,
     allTexts,
-    issue
 ];
 
 
